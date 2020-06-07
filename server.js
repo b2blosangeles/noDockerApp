@@ -11,7 +11,6 @@ var env = {
     appFolder : '/var/_localApp'
 }
 var pkg = {
-    crowdProcess : require(__dirname + '/vendor/crowdProcess/crowdProcess.js'),
     tpl : ECT({ watch: true, cache: false, root: __dirname + '/views', ext : '.ect' })
 }
 
