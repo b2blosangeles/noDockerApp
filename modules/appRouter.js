@@ -8,7 +8,7 @@
 			if(err == null) {
 				res.sendFile(fn);
 			} else  {
-				res.send('html/page404.ect');
+				res.render('html/page404.ect');
 			}
 		    });
 		};	
