@@ -11,6 +11,12 @@ var env = {
     appFolder : '/var/_localApp'
 }
 var pkg = {
+    require : function(fileName, isCache) {
+        if (!isCache) {
+            delete require.cache[fileName];
+        }
+        return require(fileName);
+    },
     tpl : ECT({ watch: true, cache: false, root: __dirname + '/views', ext : '.ect' })
 }
 
