@@ -56,4 +56,26 @@ app.post(/(.+)$/i, (req, res) => {
 
 });
 
+app.put(/(.+)$/i, (req, res) => {
+    try {
+        var APP = pkg.require(__dirname + '/modules/appRouter.js');
+        var app = new APP(env, pkg, req, res);
+        app.put();
+    } catch (err) {
+        res.send(err.toString());
+    }
+
+});
+
+app.delete(/(.+)$/i, (req, res) => {
+    try {
+        var APP = pkg.require(__dirname + '/modules/appRouter.js');
+        var app = new APP(env, pkg, req, res);
+        app.delete();
+    } catch (err) {
+        res.send(err.toString());
+    }
+
+});
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
