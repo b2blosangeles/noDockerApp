@@ -1,15 +1,16 @@
 <template>
-<div class="card shadow m-2 mr-1">
-    <div class="card-body card-form-section text-left">
+<div class="card shadow m-2 mr-1 mt-0 mb-0">
+    <div class="card-body card-master-section text-left">
         <form>
             <div class="form-group">
                 <label>Select</label>
                 {{ $parent.vueRootCommon.solution }}
                 <select class="form-control" :required="true" @change="onSelect($event)" v-model="form.branch">
+                    <option value="" :selected="form.branch === ''" >Select a solution</option>
                     <option 
                     v-for="option in branches" 
-                    v-bind:value="option.v"
-                    :selected="option.k ==  form.branch"
+                    v-bind:value="option.k"
+                    :selected="option.k == form.branch"
                     >{{ option.v }}</option>
                 </select>
             </div>
@@ -24,7 +25,7 @@ module.exports = {
     data: function() {
         return {
             errors: {},
-            branches : [{k:'a', v:'aa'}, {k:'b', v:'bb'}],
+            branches : [{k:'a', v:'solution A'}, {k:'b', v:'solution B'}],
             form : {
                 serverName  : '',
                 gitHub      : '',
@@ -104,6 +105,9 @@ module.exports = {
 </script>
  
 <style>
+
+.card-master-section { min-height: 6em; }
+
 .noFormImage {
     min-width: 100%;
     min-height :88px;

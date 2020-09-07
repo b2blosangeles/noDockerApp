@@ -1,40 +1,44 @@
 <template>
 <div class="card shadow m-2 mr-1">
-    <div class="card-body card-form-section text-left" v-if="isSolutionB()">
-        <form>
-            <div class="form-group">
-                <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
-                <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
-            </div>
-            <div class="form-group">
-                <label>Branche</label>
-                <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
-                    <option 
-                    v-for="option in branches" 
-                    v-bind:value="option.branch"
-                    :selected="option.branch ==  form.branch"
-                    >{{ option.branch }}</option>
-                </select>
-            </div>
-        </form>
-    </div>
-    <div class="card-body card-form-section text-left" v-if="isSolutionA()">
-        <form>
-            <div class="form-group">
-                <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
-                <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
-            </div>
-            <div class="form-group">
-                <label>Branche</label>
-                <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
-                    <option 
-                    v-for="option in branches" 
-                    v-bind:value="option.branch"
-                    :selected="option.branch ==  form.branch"
-                    >{{ option.branch }}</option>
-                </select>
-            </div>
-        </form>
+    <div class="card-body card-service-section text-left m-0 p-0">
+        <div v-if="!isSolutionA() && !isSolutionB()" class="text-center">
+            <img src="/images/underConstraction.jpg" />
+        </div>
+        <div class="m-2 p-2">
+            <form v-if="isSolutionA()">
+                <div class="form-group">
+                    <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
+                    <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
+                </div>
+                <div class="form-group">
+                    <label>Branche</label>
+                    <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
+                        <option 
+                        v-for="option in branches" 
+                        v-bind:value="option.branch"
+                        :selected="option.branch ==  form.branch"
+                        >{{ option.branch }}</option>
+                    </select>
+                </div>
+            </form>
+
+            <form v-if="isSolutionB()">
+                <div class="form-group">
+                    <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
+                    <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
+                </div>
+                <div class="form-group">
+                    <label>Branche</label>
+                    <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
+                        <option 
+                        v-for="option in branches" 
+                        v-bind:value="option.branch"
+                        :selected="option.branch ==  form.branch"
+                        >{{ option.branch }}</option>
+                    </select>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </template>
@@ -70,10 +74,10 @@ module.exports = {
     },
     methods : {
         isSolutionA () {
-            return (this.$parent.vueRootCommon.solution === 'aa') ? true : false;
+            return (this.$parent.vueRootCommon.solution === 'a') ? true : false;
         },
         isSolutionB () {
-            return (this.$parent.vueRootCommon.solution === 'bb') ? true : false;
+            return (this.$parent.vueRootCommon.solution === 'b') ? true : false;
         },
 
         initForm() {
@@ -135,6 +139,8 @@ module.exports = {
 </script>
  
 <style>
+.card-service-section { min-height: 36em; }
+
 .noFormImage {
     min-width: 100%;
     min-height :88px;
