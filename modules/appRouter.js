@@ -1,11 +1,12 @@
 (function () { //
 	var obj =  function (env, pkg, req, res) {
-		var fs = require('fs');
+		let fs = require('fs');
 		let me = this;
 
 		this.parameterRouter = (rests) => {
 			let p = req.params[0],
 				mp = p.match(/\/([^\/]+)(\/|$)/);
+				
 			if (mp && mp[1] === 'api') {
 				let API = pkg.require(__dirname + '/appApi.js');
 				let api = new API(env, pkg, req, res);
@@ -28,8 +29,9 @@
 						}
 					});
 				}	
+			} else {
+				res.send('OK')
 			}
-			res.send('OK');
 		}
 
 		this.get = function() {

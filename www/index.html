@@ -7,40 +7,23 @@
 <script src="/js/jquery-3.5.0.min.js"></script>
 <script src="/js/popper.1.12.9.min.js"></script>
 <script src="/js/bootstrap.4.4.1.min.js"></script>
-<title>Docker IDE for MacOS</title>
+
+
+<script src="/js/vueApp/vueIntegration.js"></script>
+<script src="/js/vueApp/main.js"></script>
+<title>EasyDocker Admin</title>
 </head>
 <body>
   <div class="container-fluid m-0 mt-2" id="vHostApp">
     <div class="row">
       <div class="col-1 p-0"></div>
       <div class="col-10 pt-6 text-center">
-      </div>
-      <div class="col-1 p-0"></div>
-    </div>
-    <div class="row">
-      <div class="col-1 p-0"></div>
-      <div class="col-10 pt-6 text-center">
-        hello world! <br/>
-          <img src="/20519213.jpg"/>
-      </div>
-      <div class="col-1 p-0"></div>
-    </div> 
-    <div class="row">
-      <div class="col-1 p-0"></div>
-      <div class="col-10 p-0">
-          <div class="container-fluid m-0">
-            <div class="row">
+        <app-header></app-header>
 
-              <div class="col-4 p-0">
-                <v-host-form></v-host-form>
-              </div>
-              <div class="col-8 p-0">
-                <v-host-list></v-host-list>
-              </div>
-              
-            </div>
-            <spinner></spinner>
-        </div>
+        
+        <data-engine ref="dataEngine"></data-engine>
+        <pop-up-modal></pop-up-modal>
+        <spinner></spinner>
       </div>
       <div class="col-1 p-0"></div>
     </div>
