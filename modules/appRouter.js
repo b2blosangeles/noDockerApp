@@ -15,6 +15,12 @@
 		this.post = () => {
             		var me = this;
 		};
+		this.put = () => {
+            		var me = this;
+		};
+		this.delete = () => {
+            		var me = this;
+		};
 	};
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 		module.exports = obj;
