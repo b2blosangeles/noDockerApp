@@ -38,7 +38,13 @@
 
 				// firefox and chrome need the <base> to be set while inserting or modifying <style> in a document.
 				tmpBaseElt = document.createElement('base');
-				tmpBaseElt.href = this.component.baseURI;
+				let patt = /^data\:text\/plain\[([^\]]+)\]/;
+				if (patt.test(this.component.baseURI)) {
+					let m = this.component.baseURI.match(patt);
+					tmpBaseElt.href = m[1];
+				} else {
+					tmpBaseElt.href = this.component.baseURI;
+				}
 
 				var headElt = this.component.getHead();
 				headElt.insertBefore(tmpBaseElt, headElt.firstChild);
@@ -457,25 +463,29 @@
 	};
 
 	httpVueLoader.httpRequest = function(url) {
-
 		return new Promise(function(resolve, reject) {
+			let patt = /^data\:text\/plain\[([^\]]+)\]/;
+			if (patt.test(url)) {
+				let v = decodeURIComponent(url.replace(patt, '')).replace(/\/index\.vue$/, '');
+				resolve(v);
+			} else {
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', url);
+						xhr.responseType = 'text';
 
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', url);
-            		xhr.responseType = 'text';
+				xhr.onreadystatechange = function() {
 
-			xhr.onreadystatechange = function() {
+					if ( xhr.readyState === 4 ) {
 
-				if ( xhr.readyState === 4 ) {
+						if ( xhr.status >= 200 && xhr.status < 300 )
+							resolve(xhr.responseText);
+						else
+							reject(xhr.status);
+					}
+				};
 
-					if ( xhr.status >= 200 && xhr.status < 300 )
-						resolve(xhr.responseText);
-					else
-						reject(xhr.status);
-				}
-			};
-
-			xhr.send(null);
+				xhr.send(null);
+			}
 		});
 	};
 

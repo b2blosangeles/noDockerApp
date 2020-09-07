@@ -1,11 +1,9 @@
 <template>
-<div class="card shadow m-2 mr-1">
+<div class="card shadow m-2 mr-1 mt-0">
     <div class="card-body card-service-section text-left m-0 p-0">
-        <div v-if="!isSolutionA() && !isSolutionB()" class="text-center">
-            <img src="/images/underConstraction.jpg" />
-        </div>
-        <div class="m-2 p-2">
-            <form v-if="isSolutionA()">
+        <div v-if="!isSolutionA() && !isSolutionB()" class="underConstracton-bg"></div>
+        <div class="m-2 p-2" v-if="isSolutionA()">
+            <form>
                 <div class="form-group">
                     <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
                     <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
@@ -21,8 +19,9 @@
                     </select>
                 </div>
             </form>
-
-            <form v-if="isSolutionB()">
+        </div>
+        <div class="m-2 p-2" v-if="isSolutionB()">
+            <form>
                 <div class="form-group">
                     <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
                     <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
@@ -140,6 +139,12 @@ module.exports = {
  
 <style>
 .card-service-section { min-height: 36em; }
+.underConstracton-bg {  
+    background-repeat: no-repeat;
+    background-image: url("/images/underConstraction.jpg"); 
+    min-height: 48em; 
+    background-size: cover;
+}
 
 .noFormImage {
     min-width: 100%;

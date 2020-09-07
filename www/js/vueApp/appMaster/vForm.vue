@@ -4,14 +4,13 @@
         <form>
             <div class="form-group">
                 <label>Select</label>
-                {{ $parent.vueRootCommon.solution }}
                 <select class="form-control" :required="true" @change="onSelect($event)" v-model="form.branch">
                     <option value="" :selected="form.branch === ''" >Select a solution</option>
                     <option 
                     v-for="option in branches" 
                     v-bind:value="option.k"
                     :selected="option.k == form.branch"
-                    >{{ option.v }}</option>
+                    >{{ option.v }} ({{ option.k }})</option>
                 </select>
             </div>
         </form>
@@ -28,15 +27,7 @@ module.exports = {
             branches : [{k:'a', v:'solution A'}, {k:'b', v:'solution B'}],
             form : {
                 serverName  : '',
-                gitHub      : '',
-                branch      : '',
-                siteDocker  : false,
-                publicDocker: '',
-                docker: {
-                    type : '',
-                    ports : [],
-                    dockerFile : ''
-                },
+                branch      : ''
             }
         }
     },
@@ -48,23 +39,6 @@ module.exports = {
         );
     },
     methods : {
-        initForm() {
-            var me = this;
-            me.branches = ['a', 'b'];
-            me.form = {
-                serverName  : '',
-                gitHub      : '',
-                branch      : '',
-                siteDocker  : ['a', 'b'],
-                publicDocker: '',
-                docker: {
-                        type : '',
-                        ports : [],
-                        dockerFile : ''
-                }
-            };
-
-        },
         cleanForm() {
             var me = this;
             me.branches = null;
