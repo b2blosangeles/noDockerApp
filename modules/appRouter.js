@@ -4,7 +4,7 @@
 		
 		this.get = function() {
 		    var me = this, p = req.params[0];
-		    res.send(p);
+		    res.send({param : req.params, query: req.query});
 		    return true;
 		    var fn = env.root + '/www/' + p;
 		    fs.stat(fn, function(err, stat) {
