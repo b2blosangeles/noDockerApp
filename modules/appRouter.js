@@ -4,7 +4,7 @@
 		
 		this.get = function() {
 		    var me = this, p = req.params[0];
-		    res.sendFile(p);
+		    res.send(p);
 		    return true;
 		    var fn = env.root + '/www/' + p;
 		    fs.stat(fn, function(err, stat) {
