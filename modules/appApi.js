@@ -1,13 +1,10 @@
 (function () { 
-    
-
 	var obj =  function (env, pkg, req, res) {
         var fs = require('fs'),
             me = this;
 		
-		this.run = function(p) {
-            res.send(p);
-            // res.send({dir: __dirname, env : env, param : req.params, query: req.query});
+		this.call = function(p, data) {
+            res.send({p : p, data: data, dir: __dirname, env : env });
 		};	
 	};
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
