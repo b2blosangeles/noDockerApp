@@ -3,19 +3,14 @@
     <div class="card-body card-form-section text-left">
         <form>
             <div class="form-group">
-                <label>Host ServerName 2 * </label>
-                <input type="text" class="form-control" maxlength="64" v-model="form.serverName" placeholder="Host ServerName">
-            </div>
-
-
-            <div class="form-group">
-                <label>Branche</label>
-                <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
+                <label>Select</label>
+                {{ $parent.vueRootCommon.solution }}
+                <select class="form-control" :required="true" @change="onSelect($event)" v-model="form.branch">
                     <option 
                     v-for="option in branches" 
-                    v-bind:value="option.branch"
-                    :selected="option.branch ==  form.branch"
-                    >{{ option.branch }}</option>
+                    v-bind:value="option.v"
+                    :selected="option.k ==  form.branch"
+                    >{{ option.v }}</option>
                 </select>
             </div>
         </form>
@@ -25,11 +20,11 @@
  
 <script>
 module.exports = {
+    props: ['vueRootCommon'],
     data: function() {
         return {
             errors: {},
-            publicDockers     : [],
-            branches : null,
+            branches : [{k:'a', v:'aa'}, {k:'b', v:'bb'}],
             form : {
                 serverName  : '',
                 gitHub      : '',
@@ -54,12 +49,12 @@ module.exports = {
     methods : {
         initForm() {
             var me = this;
-            me.branches = null;
+            me.branches = ['a', 'b'];
             me.form = {
                 serverName  : '',
                 gitHub      : '',
                 branch      : '',
-                siteDocker  : false,
+                siteDocker  : ['a', 'b'],
                 publicDocker: '',
                 docker: {
                         type : '',
@@ -83,11 +78,9 @@ module.exports = {
                 };
 
         },
-        changedGit(e) {
-            var me = this;
-            me.cleanForm();
+        onSelect(even) {
+            this.$parent.vueRootCommon.solution = event.target.value;
         },
-
         saveVHost() {
             var me = this;
         },
