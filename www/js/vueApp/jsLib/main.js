@@ -14,7 +14,8 @@ $(document).ready(
                 if (cfg.LOAD[o]) {
                     let uri = '/js/vueApp/' + o;
                     for (p in cfg.LOAD[o]) {
-                        r[p] = httpVueLoader(uri + '/' + cfg.LOAD[o][p]);
+                        let k = p[0].toUpperCase() + p.substring(1);
+                        r[o + k] = httpVueLoader(uri + '/' + cfg.LOAD[o][p]);
                     }
                 }
             }
@@ -48,8 +49,8 @@ $(document).ready(
                         'popUpModal': 'popUpModal.vue',
                         'dataEngine': 'ataEngine.vue',
                         'spinner'   : 'spinner.vue',
-                        'appHeader' : 'appHeader.vue',
-                        'appForm'   : 'vForm.vue'
+                        'header' : 'appHeader.vue',
+                        'form'   : 'vForm.vue'
                     }
                 }
             })
@@ -78,9 +79,8 @@ $(document).ready(
                 }
             },
             components: componentsLoader({
-                    LOAD: {
-
-                    }, TPL :{
+                    LOAD: {}, 
+                    TPL :{
                         'popUpModal': '/js/vueApp/appService/popUpModal.vue',
                         'dataEngine': '/js/vueApp/appService/ataEngine.vue',
                         'spinner'   : '/js/vueApp/appService/spinner.vue',
