@@ -14,6 +14,14 @@
 				api.call(p, data);
 				return true
 			}
+			if (mp && mp[1] === 'spa-package') {
+				let SPA = pkg.require(__dirname + '/appSpaPackage.js');
+				let spa= new SPA(env, pkg, req, res);
+				var data = req.query;
+				spa.call(p, data);
+				return true
+			}
+
 			if (rests.indexOf('get') !== -1) {
 				if (p == '/') {
 					var fn = env.root + '/www/index.html';

@@ -1,0 +1,9 @@
+{
+    "TPL" : [
+        "/js/vueApp/vueComm/copyright.vue",
+        "/js/vueApp/vueComm/copyright.vue"
+    ],
+    "JS" : [
+        "/js/vueApp/main.js"
+    ]
+}

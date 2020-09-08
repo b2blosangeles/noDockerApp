@@ -46,35 +46,6 @@ $(document).ready(
             })
         });
 
-        const vueText = `
-        <template>
-            <div class="hello">Copyright &#169; {{year()}}</div>
-        </template>
-       
-        <script>
-        module.exports = {
-            /*
-            data: function() {
-                return {
-                    who: 'world'
-                }
-            },
-            */
-            methods : {
-                year() {
-                    return 2018
-                }
-            }
-        }
-        <\/script>
-       
-        <style>
-        .hello {
-            background-color: #ffe;
-        }
-        </style>`;
-
-
         new Vue({
             el: '#vAppService',
             data: function() {
@@ -104,7 +75,7 @@ $(document).ready(
                 'appHeader' : 'appHeader.vue',
                 'appForm'   : 'vForm.vue'
             }, {
-                'copyright' : encodeURIComponent(vueText)
+                'copyright' : _TPL['/js/vueApp/vueComm/copyright.vue']
             })
         });
     }
