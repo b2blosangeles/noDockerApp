@@ -1,9 +1,14 @@
 {
     "TPL" : [
-        "/js/vueApp/vueComm/copyright.vue",
+        "/js/vueApp/appService/popUpModal.vue",
+        "/js/vueApp/appService/ataEngine.vue",
+        "/js/vueApp/appService/spinner.vue",
+        "/js/vueApp/appService/appHeader.vue",
+        "/js/vueApp/appService/vForm.vue",
         "/js/vueApp/vueComm/copyright.vue"
     ],
     "JS" : [
-        "/js/vueApp/main.js"
+        "/js/vueApp/jsLib/vueIntegration.js",
+        "/js/vueApp/jsLib/main.js"
     ]
 }

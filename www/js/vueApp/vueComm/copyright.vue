@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">Copyright &#169; {{year()}}</div>
+    <div class="mb-2">Copyright &#169; {{year()}}</div>
 </template>
 
 <script>
@@ -13,14 +13,12 @@ module.exports = {
     
     methods : {
         year() {
-            return 2018
+            return new Date().getFullYear();
         }
     }
 }
 </script>
 
 <style>
-.hello {
-    background-color: #ffe;
-}
+
 </style>

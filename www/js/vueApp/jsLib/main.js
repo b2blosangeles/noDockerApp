@@ -1,17 +1,22 @@
 $(document).ready(
     function() {
         var vueRootCommon = {solution: ''};
-        var componentsLoader = function(app, files, tpls){
-            let r = {},
-            uri = '/js/vueApp/' + app;
-
-            for (o in files) {
-                r[o] = httpVueLoader(uri + '/' + files[o]);
-            }
-            if (tpls) {
-                for (o in tpls) {
-                    r[o] =  httpVueLoader('data:text/plain[' + uri + ']' + tpls[o])
+        var componentsLoader = function(cfg){
+            let r = {};
+            if (cfg.TPL) {
+                for (var o in cfg.TPL) {
+                    let uri2 = cfg.TPL[o].replace(/\/([^/]+)$/, '');
+                    r[o] =  httpVueLoader('data:text/plain[' + uri2 + ']' + _TPL[cfg.TPL[o]])
                 }    
+            }
+            
+            for (var o in cfg.LOAD) {
+                if (cfg.LOAD[o]) {
+                    let uri = '/js/vueApp/' + o;
+                    for (p in cfg.LOAD[o]) {
+                        r[p] = httpVueLoader(uri + '/' + cfg.LOAD[o][p]);
+                    }
+                }
             }
             return r;
         }
@@ -37,12 +42,16 @@ $(document).ready(
                     return this.$refs.dataEngine
                 }
             },
-            components: componentsLoader('appMaster', {
-                'popUpModal': 'popUpModal.vue',
-                'dataEngine': 'ataEngine.vue',
-                'spinner'   : 'spinner.vue',
-                'appHeader' : 'appHeader.vue',
-                'appForm'   : 'vForm.vue'
+            components: componentsLoader({
+                LOAD :{
+                    'appMaster' : {
+                        'popUpModal': 'popUpModal.vue',
+                        'dataEngine': 'ataEngine.vue',
+                        'spinner'   : 'spinner.vue',
+                        'appHeader' : 'appHeader.vue',
+                        'appForm'   : 'vForm.vue'
+                    }
+                }
             })
         });
 
@@ -68,14 +77,17 @@ $(document).ready(
                     return this.$refs.dataEngine
                 }
             },
-            components: componentsLoader('appService', {
-                'popUpModal': 'popUpModal.vue',
-                'dataEngine': 'ataEngine.vue',
-                'spinner'   : 'spinner.vue',
-                'appHeader' : 'appHeader.vue',
-                'appForm'   : 'vForm.vue'
-            }, {
-                'copyright' : _TPL['/js/vueApp/vueComm/copyright.vue']
+            components: componentsLoader({
+                    LOAD: {
+
+                    }, TPL :{
+                        'popUpModal': '/js/vueApp/appService/popUpModal.vue',
+                        'dataEngine': '/js/vueApp/appService/ataEngine.vue',
+                        'spinner'   : '/js/vueApp/appService/spinner.vue',
+                        'appHeader' : '/js/vueApp/appService/appHeader.vue',
+                        'appForm'   : '/js/vueApp/appService/vForm.vue',
+                        'copyright' : '/js/vueApp/vueComm/copyright.vue'
+                    }
             })
         });
     }

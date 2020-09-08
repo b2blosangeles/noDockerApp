@@ -25,10 +25,10 @@
 				appDir = env.appFolder + '/www';
 			if (cfg.TPL) {
 				for (var k in cfg.TPL) {
-					_f['v_' + k] = (function(i) {
+					_f['A_' + k] = (function(k) {
 						return function(cbk) {
 							fs.readFile(appDir + cfg.TPL[k], 'utf-8', (err, data)=> {
-								cbk(data);
+								cbk((err) ? false : data);
 							});
 						}
 					})(k)
@@ -36,10 +36,10 @@
 			}
 			if (cfg.JS) {
 				for (var k in cfg.JS) {
-					_f['v_' + k] = (function(i) {
+					_f['B_' + k] = (function(k) {
 						return function(cbk) {
 							fs.readFile(appDir + cfg.JS[k], 'utf-8', (err, data)=> {
-								cbk(data);
+								cbk((err) ? false : data);
 							});
 						}
 					})(k)
@@ -49,12 +49,19 @@
 			cp.serial(
 				_f,
 				function(data) {
+					codeStr += "/* ====== TPL code ====== */ \n"
 					for (var k in cfg.TPL) {
-						codeStr += '_TPL["' + cfg.TPL[k] + '"] = "' + encodeURIComponent(cp.data['v_' + k]) + '";' + "\n";
+						codeStr += "/* ===> " + cfg.TPL[k] + " */ \n\n";
+						if (cp.data['A_' + k] !== false) {
+							codeStr += '_TPL["' + cfg.TPL[k] + '"] = "' + encodeURIComponent(cp.data['A_' + k]) + '";' + "\n\n";
+						}
 					}
+					codeStr += "/* ====== JS code ====== */ \n"
 					for (var k in cfg.JS) {
-						// codeStr += 'eval(decodeURIComponent("' + encodeURIComponent(cp.data['v_' + k]) + '"));' + "\n";
-						codeStr += cp.data['v_' + k] + "\n";
+						codeStr += "/* ===> " + cfg.JS[k] + " */ \n\n";
+						if (cp.data['B_' + k] !== false) {
+							codeStr += cp.data['B_' + k] + "\n\n";
+						}
 					}
 					res.send(codeStr);
 			}, 30000);
