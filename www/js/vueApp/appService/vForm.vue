@@ -141,8 +141,8 @@ module.exports = {
 .card-service-section { min-height: 36em; }
 .underConstracton-bg {  
     background-repeat: no-repeat;
-    /* background-image: url("/images/underConstraction.jpg"); */
-    background-image: url("/images/form-bg.jpg"); 
+    background-image: url("/images/underConstraction.jpg");
+    /* background-image: url("/images/form-bg.jpg"); */
     min-height: 48em; 
     background-size: cover;
 }

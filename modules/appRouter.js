@@ -38,6 +38,7 @@
 						if(err == null) {
 							res.sendFile(fn);
 						} else  {
+							// res.send('PPP');
 							res.render('html/page404.ect');
 						}
 					});

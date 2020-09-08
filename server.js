@@ -18,7 +18,7 @@ var pkg = {
         return require(fileName);
     },
     crowdProcess : require(__dirname + '/vendor/crowdProcess/crowdProcess.js'),
-    tpl : ECT({ watch: true, cache: false, root: __dirname + '/views', ext : '.ect' })
+    tpl : ECT({ watch: true, cache: false, root: __dirname + '/ectViews/ppp', ext : '.ect' })
 }
 
 app.engine('ect', pkg.tpl.render);
