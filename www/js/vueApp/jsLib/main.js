@@ -47,7 +47,7 @@ $(document).ready(
                 LOAD :{
                     'appMaster' : {
                         'popUpModal': 'popUpModal.vue',
-                        'dataEngine': 'ataEngine.vue',
+                        'dataEngine': 'dataEngine.vue',
                         'spinner'   : 'spinner.vue',
                         'header' : 'appHeader.vue',
                         'form'   : 'vForm.vue'
@@ -82,7 +82,7 @@ $(document).ready(
                     LOAD: {}, 
                     TPL :{
                         'popUpModal': '/js/vueApp/appService/popUpModal.vue',
-                        'dataEngine': '/js/vueApp/appService/ataEngine.vue',
+                        'dataEngine': '/js/vueApp/appService/dataEngine.vue',
                         'spinner'   : '/js/vueApp/appService/spinner.vue',
                         'appHeader' : '/js/vueApp/appService/appHeader.vue',
                         'appForm'   : '/js/vueApp/appService/vForm.vue',

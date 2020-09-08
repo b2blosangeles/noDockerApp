@@ -8,6 +8,10 @@
         "/js/vueApp/vueComm/copyright.vue"
     ],
     "JS" : [
+        "/js/jquery-3.5.0.min.js",
+        "/js/popper.1.12.9.min.js",
+        "/js/bootstrap.4.4.1.min.js",
+
         "/js/vueApp/jsLib/vueIntegration.js",
         "/js/vueApp/jsLib/main.js"
     ]
