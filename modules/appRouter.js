@@ -5,8 +5,13 @@
 
 		this.parameterRouter = (rests) => {
 			let p = req.params[0],
-				mp = p.match(/\/([^\/]+)(\/|$)/);
-				
+				mp = p.match(/\/([^\/]+)(\/|$)/),
+				mapPatt = /\.map$/;
+			/*
+			if (mapPatt.test(p)) {
+				p = p.replace(mapPatt, '');
+			}*/
+
 			if (mp && mp[1] === 'api') {
 				let API = pkg.require(__dirname + '/appApi.js');
 				let api = new API(env, pkg, req, res);

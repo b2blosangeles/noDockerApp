@@ -121,7 +121,7 @@
 				me.is_css = true;
 				res.setHeader('Content-Type', "text/css");
 			} else {
-				res.setHeader('Content-Type', "text/html");
+				res.setHeader('Content-Type', "text/plain");
 			}			
 		}
 	};
