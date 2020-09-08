@@ -18,10 +18,11 @@ var pkg = {
         return require(fileName);
     },
     crowdProcess : require(__dirname + '/vendor/crowdProcess/crowdProcess.js'),
-    tpl : ECT({ watch: true, cache: false, root: __dirname + '/ectViews/ppp', ext : '.ect' })
+    tpl : ECT({ watch: true, cache: false, root: env.root + '/ectViews', ext : '.ect' })
 }
 
 app.engine('ect', pkg.tpl.render);
+
 
 app.use(bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies   
