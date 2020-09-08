@@ -21,6 +21,7 @@ $(document).ready(
             }
             return r;
         }
+        /*
         new Vue({
             el: '#vAppMaster',
             data: function() {
@@ -55,7 +56,7 @@ $(document).ready(
                 }
             })
         });
-
+        */
         new Vue({
             el: '#vAppService',
             data: function() {
