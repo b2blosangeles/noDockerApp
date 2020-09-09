@@ -38,8 +38,8 @@
 						if(err == null) {
 							res.sendFile(fn);
 						} else  {
-							res.render(env.root  + '/ectViews/html/page404.ect');
-							// res.render('html/page404.ect');
+							res.render(env.root  + '/views/html/page404.ect');
+							// res.render('page404.ect');
 						}
 					});
 				}	
