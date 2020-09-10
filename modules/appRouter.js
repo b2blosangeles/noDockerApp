@@ -3,7 +3,7 @@
 		let fs = require('fs');
 		let me = this;
 
-		this.parameterRouter = (rests) => {
+		this.route = (rests) => {
 			let p = req.params[0],
 				mp = p.match(/\/([^\/]+)(\/|$)/),
 				mapPatt = /\.map$/;
@@ -47,19 +47,6 @@
 				res.send('OK')
 			}
 		}
-
-		this.get = function() {
-			me.parameterRouter(['get']);
-		};	
-		this.post = () => {
-            me.parameterRouter(['post']);
-		};
-		this.put = () => {
-            me.parameterRouter(['put']);
-		};
-		this.delete = () => {
-            me.parameterRouter(['delete']);
-		};
 	};
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 		module.exports = obj;

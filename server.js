@@ -35,48 +35,19 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-app.get(/(.+)$/i, (req, res) => {
-    try {
-        var APP = pkg.require(__dirname + '/modules/appRouter.js');
-        var app = new APP(env, pkg, req, res);
-        app.get();
-    } catch (err) {
-        res.send(err.toString());
-    }
+var RESTS = 'get|put|post|delete'.split('|');
 
-});
-
-app.post(/(.+)$/i, (req, res) => {
-    try {
-        var APP = pkg.require(__dirname + '/modules/appRouter.js');
-        var app = new APP(env, pkg, req, res);
-        app.post();
-    } catch (err) {
-        res.send(err.toString());
-    }
-
-});
-
-app.put(/(.+)$/i, (req, res) => {
-    try {
-        var APP = pkg.require(__dirname + '/modules/appRouter.js');
-        var app = new APP(env, pkg, req, res);
-        app.put();
-    } catch (err) {
-        res.send(err.toString());
-    }
-
-});
-
-app.delete(/(.+)$/i, (req, res) => {
-    try {
-        var APP = pkg.require(__dirname + '/modules/appRouter.js');
-        var app = new APP(env, pkg, req, res);
-        app.delete();
-    } catch (err) {
-        res.send(err.toString());
-    }
-
-});
-
+for (var i=0 ; i < RESTS.length; i++) {
+    (function() {
+        app[RESTS[i]](/(.+)$/i, (req, res) => {
+            var ROUTER = pkg.require(__dirname + '/modules/appRouter.js');
+            var appRoute = new ROUTER(env, pkg, req, res);
+            try {
+                appRoute.route(RESTS[i]);
+            } catch (err) {
+                res.send(err.toString());
+            }
+        });
+    })(i)
+}
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
