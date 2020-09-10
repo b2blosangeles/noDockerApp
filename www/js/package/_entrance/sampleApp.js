@@ -82,12 +82,12 @@ $(document).ready(
             components: componentsLoader({
                     LOAD: {}, 
                     TPL :{
-                        'popUpModal': '/js/vueApp/appService/popUpModal.vue',
-                        'dataEngine': '/js/vueApp/appService/dataEngine.vue',
-                        'spinner'   : '/js/vueApp/appService/spinner.vue',
-                        'appHeader' : '/js/vueApp/appService/appHeader.vue',
-                        'appForm'   : '/js/vueApp/appService/vForm.vue',
-                        'copyright' : '/js/vueApp/vueComm/copyright.vue'
+                        'popUpModal': '/vueApp/appService/popUpModal.vue',
+                        'dataEngine': '/vueApp/appService/dataEngine.vue',
+                        'spinner'   : '/vueApp/appService/spinner.vue',
+                        'appHeader' : '/vueApp/appService/appHeader.vue',
+                        'appForm'   : '/vueApp/appService/vForm.vue',
+                        'copyright' : '/vueApp/vueComm/copyright.vue'
                     }
             })
         });

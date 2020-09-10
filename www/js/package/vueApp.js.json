@@ -1,11 +1,11 @@
 {
     "TPL" : [
-        "/js/vueApp/appService/popUpModal.vue",
-        "/js/vueApp/appService/ataEngine.vue",
-        "/js/vueApp/appService/spinner.vue",
-        "/js/vueApp/appService/appHeader.vue",
-        "/js/vueApp/appService/vForm.vue",
-        "/js/vueApp/vueComm/copyright.vue"
+        "/vueApp/appService/popUpModal.vue",
+        "/vueApp/appService/ataEngine.vue",
+        "/vueApp/appService/spinner.vue",
+        "/vueApp/appService/appHeader.vue",
+        "/vueApp/appService/vForm.vue",
+        "/vueApp/vueComm/copyright.vue"
     ],
     "JS" : [
         "/js/coffee-script.js",
@@ -13,7 +13,7 @@
         "/js/popper.1.12.9.min.js",
         "/js/bootstrap.4.4.1.js",
 
-        "/js/vueApp/jsLib/vueIntegration.js",
-        "/js/vueApp/jsLib/main.js"
+        "/vueApp/jsLib/vueIntegration.js",
+        "/js/package/_entrance/sampleApp.js"
     ]
 }
