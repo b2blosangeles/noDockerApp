@@ -3,7 +3,7 @@
 		let fs = require('fs');
 		let me = this;
 
-		this.route = (rests) => {
+		this.route = (rest) => {
 			let p = req.params[0],
 				mp = p.match(/\/([^\/]+)(\/|$)/),
 				mapPatt = /\.map$/;
@@ -16,7 +16,7 @@
 				let API = pkg.require(__dirname + '/appApi.js');
 				let api = new API(env, pkg, req, res);
 				var data = (rests.indexOf('get') !== -1) ? req.query : req.body;
-				api.call(p, data);
+				api.call(rest, p, data);
 				return true
 			}
 			if (mp && mp[1] === 'spa-package') {
