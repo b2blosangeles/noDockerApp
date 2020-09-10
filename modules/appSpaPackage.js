@@ -3,7 +3,7 @@
         var fs = require('fs'),
             me = this,
 			dirPatt = /\/spa\-package\//;
-		this.call = function(p, data) {
+		this.call = function(p) {
 			let spaDir = env.appFolder + '/www/js/package/';
 			let cfgFn = spaDir + p.replace(dirPatt, '');
 			let fileAttr = me.getConfigAttr(cfgFn);

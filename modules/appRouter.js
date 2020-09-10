@@ -5,25 +5,19 @@
 
 		this.route = (rest) => {
 			let p = req.params[0],
-				mp = p.match(/\/([^\/]+)(\/|$)/),
-				mapPatt = /\.map$/;
-			/*
-			if (mapPatt.test(p)) {
-				p = p.replace(mapPatt, '');
-			}*/
+				mp = p.match(/\/([^\/]+)(\/|$)/);
 
 			if (mp && mp[1] === 'api') {
 				let API = pkg.require(__dirname + '/appApi.js');
 				let api = new API(env, pkg, req, res);
-				var data = (rests.indexOf('get') !== -1) ? req.query : req.body;
+				var data = (rest === 'get') ? req.query : req.body;
 				api.call(rest, p, data);
 				return true
 			}
 			if (mp && mp[1] === 'spa-package') {
 				let SPA = pkg.require(__dirname + '/appSpaPackage.js');
 				let spa= new SPA(env, pkg, req, res);
-				var data = req.query;
-				spa.call(p, data);
+				spa.call(p);
 				return true
 			}
 			if (p == '/') {
@@ -37,7 +31,6 @@
 						res.sendFile(fn);
 					} else  {
 						res.render(env.root  + '/views/html/page404.ect');
-						// res.render('page404.ect');
 					}
 				});
 			}
