@@ -18,6 +18,9 @@
                         >{{ option.branch }}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-warning" v-on:click="saveForm()">Save</button>
+                </div>
             </form>
         </div>
         <div class="m-2 p-2" v-if="isSolutionB()">
@@ -35,6 +38,9 @@
                         :selected="option.branch ==  form.branch"
                         >{{ option.branch }}</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-warning" v-on:click="saveForm()">Save</button>
                 </div>
             </form>
         </div>
@@ -115,7 +121,7 @@ module.exports = {
             me.cleanForm();
         },
 
-        saveVHost() {
+        saveForm() {
             var me = this;
         },
 
