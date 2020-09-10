@@ -1,10 +1,10 @@
 (function () { 
-	var obj =  function (env, pkg, req, res) {
+	var obj =  function (env, pkg) {
         var fs = require('fs'),
             me = this;
 		
-		this.call = function(rest, p, data) {
-            res.send({rest:rest, p : p, data: data, dir: __dirname, env : env });
+		this.call = function(rest, incomeData, callback) {
+            callback({mark : 'A', incomeData: incomeData, dir: __dirname, env : env });
 		};	
 	};
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {

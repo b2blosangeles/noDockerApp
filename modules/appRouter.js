@@ -9,9 +9,16 @@
 
 			if (mp && mp[1] === 'api') {
 				let API = pkg.require(__dirname + '/appApi.js');
-				let api = new API(env, pkg, req, res);
-				var data = (rest === 'get') ? req.query : req.body;
-				api.call(rest, p, data);
+				let api = new API(env, pkg);
+				var incomeData = {
+					rest 	: rest,
+					path 	: p,
+					query 	: req.query,
+					post	: req.body
+				};
+				api.call(rest, incomeData, function(output) {
+					res.send(output);
+				});
 				return true
 			}
 			if (mp && mp[1] === 'spa-package') {
