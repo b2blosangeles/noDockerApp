@@ -27,7 +27,7 @@
 				return true
 			}
 
-			if (rests.indexOf('get') !== -1) {
+			//if (rests.indexOf('get') !== -1) {
 				if (p == '/') {
 					var fn = env.root + '/www/index.html';
 					res.sendFile(fn);
@@ -43,9 +43,9 @@
 						}
 					});
 				}	
-			} else {
-				res.send('OK')
-			}
+			//} else {
+			//	res.send('OK')
+			//}
 		}
 	};
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
