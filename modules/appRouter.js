@@ -26,26 +26,21 @@
 				spa.call(p, data);
 				return true
 			}
-
-			//if (rests.indexOf('get') !== -1) {
-				if (p == '/') {
-					var fn = env.root + '/www/index.html';
-					res.sendFile(fn);
-					return true
-				} else {
-					var fn = env.root + '/www' + p;
-					fs.stat(fn, function(err, stat) {
-						if(err == null) {
-							res.sendFile(fn);
-						} else  {
-							res.render(env.root  + '/views/html/page404.ect');
-							// res.render('page404.ect');
-						}
-					});
-				}	
-			//} else {
-			//	res.send('OK')
-			//}
+			if (p == '/') {
+				var fn = env.root + '/www/index.html';
+				res.sendFile(fn);
+				return true
+			} else {
+				var fn = env.root + '/www' + p;
+				fs.stat(fn, function(err, stat) {
+					if(err == null) {
+						res.sendFile(fn);
+					} else  {
+						res.render(env.root  + '/views/html/page404.ect');
+						// res.render('page404.ect');
+					}
+				});
+			}
 		}
 	};
 	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
