@@ -1,8 +1,8 @@
 <template>
-<div class="card shadow m-2 mr-1 mt-0 form-bg">
+<div class="card shadow m-2 mr-1 mt-0">
     <div class="card-body card-service-section text-left m-0 p-0">
-        <div v-if="!isSolutionA() && !isSolutionB()" class="underConstracton-bg"></div>
-        <div class="m-2 p-2" v-if="isSolutionA()">
+        <div v-if="!isSolutionA() && !isSolutionB()"></div>
+        <div class="m-3 p-2 rounded form-bg" v-if="isSolutionA()">
             <form>
                 <div class="form-group">
                     <label>Host ServerName *  {{$parent.vueRootCommon.solution }} </label>
@@ -138,7 +138,12 @@ module.exports = {
 </script>
  
 <style>
-.card-service-section { min-height: 36em; }
+.card-service-section { 
+    min-height: 36em;
+    background-repeat: no-repeat;
+    background-image: url("/images/form-bg.jpg");  
+    background-size: cover;
+}
 .underConstracton-bg {  
     background-repeat: no-repeat;
     background-image: url("/images/underConstraction.jpg");
@@ -148,9 +153,10 @@ module.exports = {
 }
 
 .form-bg {
-    background-repeat: no-repeat;
-    background-image: url("/images/form-bg.jpg"); 
-    background-size: cover;
+  /* background-color : #fff; */
+  min-height : 36em;
+  background:  rgba(55, 55, 55, 0.6);
+  color : #fff;
 }
 
 .noFormImage {
