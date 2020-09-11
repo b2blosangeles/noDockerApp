@@ -178,25 +178,13 @@ module.exports = {
                 dataType: 'JSON'
             });
         },
-        saveVHostForm(data, callback) {
+        saveData(data, callback) {
             var me = this;
             me.$parent.triggerSpinner = true;
-            /*
-            setTimeout(
-                () => {
-                    alert(889);
-                     me.$parent.triggerSpinner = false;
-                }, 1000
-            );
-            return true;
-            */
             $.ajax({
                 type: 'POST',
                 url:'/api',
-                data: {
-                    cmd :'addHost',
-                    data: data
-                },
+                data: data,
                 success: function(result) {
                     me.$parent.triggerSpinner = false;
                     if (result.status === 'success') {

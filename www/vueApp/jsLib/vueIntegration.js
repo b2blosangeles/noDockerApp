@@ -26,11 +26,10 @@
 		root.httpVueLoader=factory()
 })(this,function factory() {
 	'use strict';
-
+	const URL_DATA_PATT = /^data\:text\/plain\;\[([^\]]+)\]/;
 	var scopeIndex = 0;
 
 	StyleContext.prototype = {
-
 		withBase: function(callback) {
 
 			var tmpBaseElt;
@@ -38,9 +37,9 @@
 
 				// firefox and chrome need the <base> to be set while inserting or modifying <style> in a document.
 				tmpBaseElt = document.createElement('base');
-				let patt = /^data\:text\/plain\[([^\]]+)\]/;
-				if (patt.test(this.component.baseURI)) {
-					let m = this.component.baseURI.match(patt);
+				let patt = /^data\:text\/plain\;\[([^\]]+)\]/;
+				if (URL_DATA_PATT.test(this.component.baseURI)) {
+					let m = this.component.baseURI.match(URL_DATA_PATT);
 					tmpBaseElt.href = m[1];
 				} else {
 					tmpBaseElt.href = this.component.baseURI;
@@ -277,9 +276,13 @@
 				this.baseURI = componentURL.substr(0, componentURL.lastIndexOf('/')+1);
 				var doc = document.implementation.createHTMLDocument('');
 
+				if (URL_DATA_PATT.test(this.baseURI)) {
+					let m = this.baseURI.match(URL_DATA_PATT);
+					this.baseURI  = m[1];
+				} 
+
 				// IE requires the <base> to come with <style>
 				doc.body.innerHTML = (this.baseURI ? '<base href="'+this.baseURI+'">' : '') + responseText;
-
 				for ( var it = doc.body.firstChild; it; it = it.nextSibling ) {
 
 					switch ( it.nodeName ) {
@@ -464,9 +467,8 @@
 
 	httpVueLoader.httpRequest = function(url) {
 		return new Promise(function(resolve, reject) {
-			let patt = /^data\:text\/plain\[([^\]]+)\]/;
-			if (patt.test(url)) {
-				let v = decodeURIComponent(url.replace(patt, '')).replace(/\/index\.vue$/, '');
+			if (URL_DATA_PATT.test(url)) {
+				let v = decodeURIComponent(url.replace(URL_DATA_PATT, '')).replace(/\/index\.vue$/, '');
 				resolve(v);
 			} else {
 				var xhr = new XMLHttpRequest();

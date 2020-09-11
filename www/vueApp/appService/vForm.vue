@@ -11,11 +11,11 @@
                 <div class="form-group">
                     <label>Branche</label>
                     <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
-                        <option 
-                        v-for="option in branches" 
-                        v-bind:value="option.branch"
-                        :selected="option.branch ==  form.branch"
-                        >{{ option.branch }}</option>
+                    <option 
+                    v-for="option in branches" 
+                    v-bind:value="option.k"
+                    :selected="option.k == form.branch"
+                    >{{ option.v }} ({{ option.k }})</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -32,11 +32,11 @@
                 <div class="form-group">
                     <label>Branche</label>
                     <select class="form-control" :required="true" @change="onBranchSelect($event)" v-model="form.branch">
-                        <option 
-                        v-for="option in branches" 
-                        v-bind:value="option.branch"
-                        :selected="option.branch ==  form.branch"
-                        >{{ option.branch }}</option>
+                    <option 
+                    v-for="option in branches" 
+                    v-bind:value="option.k"
+                    :selected="option.k == form.branch"
+                    >{{ option.v }} ({{ option.k }})</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -55,7 +55,7 @@ module.exports = {
         return {
             errors: {},
             publicDockers     : [],
-            branches : null,
+            branches : [{k:'a', v:'solution A'}, {k:'b', v:'solution B'}],
             form : {
                 serverName  : '',
                 gitHub      : '',
@@ -87,7 +87,7 @@ module.exports = {
 
         initForm() {
             var me = this;
-            me.branches = null;
+            me.branches = [{k:'a', v:'solution A'}, {k:'b', v:'solution B'}];
             me.form = {
                 serverName  : '',
                 gitHub      : '',
@@ -123,6 +123,8 @@ module.exports = {
 
         saveForm() {
             var me = this;
+            me.$parent.dataEngine().saveData(me.form, function() {
+            });
         },
 
         reset() {

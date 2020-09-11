@@ -5,19 +5,13 @@ $(document).ready(
             let r = {};
             if (cfg.TPL) {
                 for (var o in cfg.TPL) {
-                    let uri2 = cfg.TPL[o].replace(/\/([^/]+)$/, '');
-                    r[o] =  httpVueLoader('data:text/plain[' + uri2 + ']' + _TPL[cfg.TPL[o]])
+                    let uri2 = cfg.TPL[o].replace(/\/([^/]+)$/, '/');
+                   // alert(uri2);
+                    r[o] =  httpVueLoader('data:text/plain;[' + uri2 + '-' + o +']' + _TPL[cfg.TPL[o]])
                 }    
             }
-            
             for (var o in cfg.LOAD) {
-                if (cfg.LOAD[o]) {
-                    let uri = '/js/vueApp/' + o;
-                    for (p in cfg.LOAD[o]) {
-                        let k = p[0].toUpperCase() + p.substring(1);
-                        r[o + k] = httpVueLoader(uri + '/' + cfg.LOAD[o][p]);
-                    }
-                }
+                r[o] =  httpVueLoader(cfg.LOAD[o]);
             }
             return r;
         }
@@ -80,12 +74,13 @@ $(document).ready(
                 }
             },
             components: componentsLoader({
-                    LOAD: {}, 
+                    LOAD: {
+                    }, 
                     TPL :{
                         'popUpModal': '/vueApp/appService/popUpModal.vue',
+                        'appHeader' : '/vueApp/appService/appHeader.vue',
                         'dataEngine': '/vueApp/appService/dataEngine.vue',
                         'spinner'   : '/vueApp/appService/spinner.vue',
-                        'appHeader' : '/vueApp/appService/appHeader.vue',
                         'appForm'   : '/vueApp/appService/vForm.vue',
                         'copyright' : '/vueApp/vueComm/copyright.vue'
                     }
