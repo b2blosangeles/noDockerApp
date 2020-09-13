@@ -14,6 +14,7 @@
         "/js/bootstrap.4.4.1.js",
 
         "/vueApp/jsLib/vueIntegration.js",
+        "/vueApp/jsLib/vueLoader.js",
         "/js/package/_entrance/sampleApp.js"
     ]
 }
