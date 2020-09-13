@@ -5,17 +5,60 @@ $(document).ready(
             let r = {};
             if (cfg.TPL) {
                 for (var o in cfg.TPL) {
-                    let uri2 = cfg.TPL[o].replace(/\/([^/]+)$/, '/');
-                   // alert(uri2);
-                    r[o] =  httpVueLoader('data:text/plain;[' + uri2 + '-' + o +']' + _TPL[cfg.TPL[o]])
+                    let uri = cfg.TPL[o].replace(/\/([^/]+)$/, '/');
+                    r[o] =  httpVueLoader('data:text/plain;[' + uri +']' + _TPL[cfg.TPL[o]])
                 }    
             }
             for (var o in cfg.LOAD) {
                 r[o] =  httpVueLoader(cfg.LOAD[o]);
             }
             return r;
-        }
-        /*
+        };
+
+        var asynLoaderComponent = function(v, o){
+            
+            for (var k in v) {
+                var tpl = {};
+                if (_TPL[k]) {
+                    let uri = v[k].replace(/\/([^/]+)$/, '/');
+                    tpl = httpVueLoader('data:text/plain;[' + uri + ']' + _TPL[k]);
+                } else {
+                    tpl = httpVueLoader(v[k]);
+                }
+                if (!o) {
+                    Vue.component(k, tpl);
+                } else {
+                    o.$options.components[k] = tpl;
+                }
+            }       
+        };
+
+        new Vue({
+            el: '#vAppMaster',
+            data: function() {
+                return {
+                    owner : 'shusiou.win 2.0'
+                }
+            },
+            created() {
+
+            },
+            mounted () {
+                asynLoaderComponent({'copyright' : '/vueApp/vueComm/copyright.vue'}, this);
+                this.$forceUpdate();
+            },
+            methods : {
+            },
+            components: componentsLoader({
+                PARKING : {
+
+                },
+                TPL     :{
+                //    'copyright' : '/vueApp/vueComm/copyright.vue'
+                }
+            })
+        });
+        /*   
         new Vue({
             el: '#vAppMaster',
             data: function() {
@@ -65,8 +108,12 @@ $(document).ready(
                     },
                     triggerSpinner : false,
                     module : 'list',
-                    vueRootCommon :  (typeof vueRootCommon === 'undefined')? {} : vueRootCommon
+                    vueRootCommon :  (typeof vueRootCommon === 'undefined')? {} : vueRootCommon,
+                    owner : 'shusiou.win 1.0'
                 }
+            },
+            mounted () {
+               // console.log(this.components);
             },
             methods :{
                 dataEngine() {
@@ -74,15 +121,15 @@ $(document).ready(
                 }
             },
             components: componentsLoader({
-                    LOAD: {
+                    LOAD    : {
                     }, 
-                    TPL :{
+                    TPL     :{
                         'popUpModal': '/vueApp/appService/popUpModal.vue',
                         'appHeader' : '/vueApp/appService/appHeader.vue',
                         'dataEngine': '/vueApp/appService/dataEngine.vue',
                         'spinner'   : '/vueApp/appService/spinner.vue',
                         'appForm'   : '/vueApp/appService/vForm.vue',
-                        'copyright' : '/vueApp/vueComm/copyright.vue'
+                        'fileUpload': '/vueApp/vueComm/fileUpload/fileUpload.vue'
                     }
             })
         });

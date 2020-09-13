@@ -37,7 +37,6 @@
 
 				// firefox and chrome need the <base> to be set while inserting or modifying <style> in a document.
 				tmpBaseElt = document.createElement('base');
-				let patt = /^data\:text\/plain\;\[([^\]]+)\]/;
 				if (URL_DATA_PATT.test(this.component.baseURI)) {
 					let m = this.component.baseURI.match(URL_DATA_PATT);
 					tmpBaseElt.href = m[1];
