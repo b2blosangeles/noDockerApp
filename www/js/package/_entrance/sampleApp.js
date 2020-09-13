@@ -15,20 +15,18 @@ $(document).ready(
             return r;
         };
 
-        var asynLoaderComponent = function(v, o){
-            
+        var dynamicLoaderComponent = function(v, o){
             for (var k in v) {
-                var tpl = {};
-                if (_TPL[k]) {
-                    let uri = v[k].replace(/\/([^/]+)$/, '/');
-                    tpl = httpVueLoader('data:text/plain;[' + uri + ']' + _TPL[k]);
+                let uri = v[k].replace(/\/([^/]+)$/, '/');
+                if (!uri || uri === '/' || !k)  {
+                    continue;
                 } else {
-                    tpl = httpVueLoader(v[k]);
-                }
-                if (!o) {
-                    Vue.component(k, tpl);
-                } else {
-                    o.$options.components[k] = tpl;
+                    var tpl = (!_TPL[k]) ? httpVueLoader(v[k]) : httpVueLoader('data:text/plain;[' + uri + ']' + _TPL[k]);
+                    if (!o) {
+                        Vue.component(k, tpl);
+                    } else {
+                        o.$options.components[k] = tpl;
+                    }
                 }
             }       
         };
@@ -44,7 +42,7 @@ $(document).ready(
 
             },
             mounted () {
-                asynLoaderComponent({'copyright' : '/vueApp/vueComm/copyright.vue'}, this);
+                dynamicLoaderComponent({'copyright' : '/vueApp/vueComm/copyright.vue'}, this);
                 this.$forceUpdate();
             },
             methods : {
