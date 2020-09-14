@@ -3,8 +3,11 @@ VueLoader.components = function(cfg){
     let r = {};
     if (cfg.TPL) {
         for (var o in cfg.TPL) {
-            let uri = cfg.TPL[o].replace(/\/([^/]+)$/, '/');
-            r[o] =  httpVueLoader('data:text/plain;[' + uri +']' + _TPL[cfg.TPL[o]])
+            if (!_TPL.vue[cfg.TPL[o]]) {
+                continue;
+            } else {
+                r[o] =  httpVueLoader(_TPL.vue[cfg.TPL[o]])
+            }
         }    
     }
     for (var o in cfg.LOAD) {
@@ -19,7 +22,7 @@ VueLoader.dynamic = function(v, o){
         if (!uri || uri === '/' || !k)  {
             continue;
         } else {
-            var tpl = (!_TPL[k]) ? httpVueLoader(v[k]) : httpVueLoader('data:text/plain;[' + uri + ']' + _TPL[k]);
+            var tpl = (!_TPL.vue[k]) ? httpVueLoader(v[k]) : httpVueLoader('data:text/plain;[' + uri + ']' + _TPL.vue[k]);
             if (!o) {
                 Vue.component(k, tpl);
             } else {

@@ -21,7 +21,7 @@ $(document).ready(
                 PARKING : {
 
                 },
-                TPL     :{
+                TPL     : {
                 //    'copyright' : '/vueApp/vueComm/copyright.vue'
                 }
             })
