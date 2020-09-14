@@ -1,23 +1,30 @@
 $(document).ready(
     function() {
-        var vueRootCommon = {solution: ''};
+        var vueRootCommon = (typeof VUEApp.rootData === 'undefined')? {} : VUEApp.rootData;
+        VUEApp.registeRootData('solution','');
+
+        var router = new VueRouter({
+            mode: 'history',
+            routes: []
+        });
+
         new Vue({
             el: '#vAppMaster',
             data: function() {
                 return {
-                    owner : 'shusiou.win 2.0'
+                    owner : 'shusiou.win'
                 }
             },
             created() {
 
             },
             mounted () {
-                VueLoader.dynamic({'copyright' : '/vueApp/vueComm/copyright.vue'}, this);
-                this.$forceUpdate();
+ //               VueApp.dynamic({'copyright' : '/vueApp/vueComm/copyright.vue'}, this);
+ //               this.$forceUpdate();
             },
             methods : {
             },
-            components: VueLoader.components({
+            components: VUEApp.loadComponents({
                 PARKING : {
 
                 },
@@ -49,7 +56,7 @@ $(document).ready(
                     return this.$refs.dataEngine
                 }
             },
-            components: VueLoader.components({
+            components: VueApp.components({
                 LOAD :{
                     'appMaster' : {
                         'popUpModal': 'popUpModal.vue',
@@ -76,19 +83,20 @@ $(document).ready(
                     },
                     triggerSpinner : false,
                     module : 'list',
-                    vueRootCommon :  (typeof vueRootCommon === 'undefined')? {} : vueRootCommon,
-                    owner : 'shusiou.win 1.0'
+                    vueRootCommon :  vueRootCommon,
+                    owner : 'shusiou.win'
                 }
             },
             mounted () {
-               // console.log(this.components);
+                VUEApp.dynamicLoadComponent({'copyright' : '/vueApp/vueComm/copyright.vue'}, this);
+                this.$forceUpdate();
             },
             methods :{
                 dataEngine() {
                     return this.$refs.dataEngine
                 }
             },
-            components: VueLoader.components({
+            components: VUEApp.loadComponents({
                     LOAD    : {
                     }, 
                     TPL     :{
@@ -99,6 +107,25 @@ $(document).ready(
                         'appForm'   : '/vueApp/appService/vForm.vue',
                         'fileUpload': '/vueApp/vueComm/fileUpload/fileUpload.vue'
                     }
+            })
+        });
+
+        new Vue({
+            router,
+            el: '#vDebugMessage',
+            data: function() {
+                return {
+                    vueRootCommon : vueRootCommon
+                }
+            },
+            mounted () {
+                VUEApp.registeRootData('debugModel',(this.$route.query.debug !== 'true') ? false :  true);
+            },
+            methods :{},
+            components: VUEApp.loadComponents({
+                LOAD    : {
+                    'appDebug'  : '/vueApp/vueComm/vueDebug.vue'
+                }
             })
         });
     }

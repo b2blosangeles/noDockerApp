@@ -53,7 +53,7 @@ module.exports = {
             me.$parent.module = (me.$parent.module === 'form') ? 'list' : 'form';
         },
         onSelect(even) {
-            this.$parent.vueRootCommon.solution = event.target.value;
+            this.$parent.vueRootCommon.solution = event.target.value;           
         },
     }
 }

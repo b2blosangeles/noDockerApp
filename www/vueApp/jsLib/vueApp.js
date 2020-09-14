@@ -1,9 +1,11 @@
-var VueLoader = {};
-VueLoader.components = function(cfg){
+var VUEApp = {rootData : {debug : { error : {}, warning :{}}}};
+
+VUEApp.loadComponents = function(cfg){
     let r = {};
     if (cfg.TPL) {
         for (var o in cfg.TPL) {
             if (!_TPL.vue[cfg.TPL[o]]) {
+                this.rootData.debug.warning['tpl_' + cfg.TPL[o]] = 'Missing load the TPL.vue: ' + cfg.TPL[o];
                 continue;
             } else {
                 r[o] =  httpVueLoader(_TPL.vue[cfg.TPL[o]])
@@ -16,7 +18,7 @@ VueLoader.components = function(cfg){
     return r;
 };
 
-VueLoader.dynamic = function(v, o){
+VUEApp.dynamicLoadComponent = function(v, o){
     for (var k in v) {
         let uri = v[k].replace(/\/([^/]+)$/, '/');
         if (!uri || uri === '/' || !k)  {
@@ -30,4 +32,8 @@ VueLoader.dynamic = function(v, o){
             }
         }
     }       
+};
+
+VUEApp.registeRootData = function(p, v){
+    this.rootData[p] = v;
 };

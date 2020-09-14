@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-2">Copyright &#169; {{owner}} {{year()}}</div>
+    <div class="mb-2">{{owner}}  &#169; {{year()}}</div>
 </template>
 
 <script>
