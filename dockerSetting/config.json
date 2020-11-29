@@ -1,0 +1,4 @@
+{
+  "type"        : "webServer",
+  "ports"       : [3000]
+}
