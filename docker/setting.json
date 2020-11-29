@@ -1,5 +1,5 @@
 {
   "type"        : "webServer",
-  "ports"       : [3306],
+  "ports"       : [3000],
   "dockerFile"  : "dockerFileA"
 }
